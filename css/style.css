@@ -734,6 +734,9 @@ aside {
   flex-wrap: wrap;
   -webkit-flex-wrap: wrap; }
 
+.content__publications {
+  padding: 0 2px; }
+
 .team-member {
   width: 100%;
   padding: 0.5rem 1rem;
