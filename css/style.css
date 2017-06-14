@@ -736,6 +736,9 @@ aside {
 
 .content__publications {
   padding: 0 2px; }
+  .content__publications p {
+    font-weight: bold;
+    text-align: center; }
 
 .team-member {
   width: 100%;
