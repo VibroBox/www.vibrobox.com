@@ -37,7 +37,7 @@
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css"  />
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+
 
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=cce4bfba">
 <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png?v=ac66a62b">
@@ -55,6 +55,10 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico?v=f4d0709b">
 
 <link rel="canonical" href="https://www.vibrobox.com/contact/">
+
+  
+
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
 
 </head>
 
@@ -130,12 +134,72 @@
   Our Contacts
 </h1>
 <div class="preface preface--contacts">
-  <p>Please don&rsquo;t hesitate to contact us directly at <a href="mailto:info@vibrobox.com" target="_blank">info@vibrobox.com</a> or on <a href="https://m.me/VibroBox" target="_blank">FaceBook</a></p>
+  <p>Please don&rsquo;t hesitate to contact us directly at <a href="mailto:info@vibrobox.com" target="_blank">info@vibrobox.com</a>, on <a href="https://m.me/VibroBox" target="_blank">FaceBook</a> or by using the form below.</p>
 
 <p>We will gladly assist you with any questions you have regarding the service and cooperation opportunities.</p>
 
 </div>
 <div class="contacts">
+  <section class=""><form id="contactForm">
+  <div class="contacts__row">
+    <input type="text" name="First Name" class="contacts__column" placeholder="First Name *" required>
+    <input type="text" name="Last Name" class="contacts__column" placeholder="Last Name *" required>
+  </div>
+  <div class="contacts__row">
+    <input type="text" name="Company" class="contacts__column" placeholder="Company/Institution">
+    <input type="text" name="Job Title" class="contacts__column" placeholder="Job Title">
+  </div>
+  <div class="contacts__row">
+    <input type="email" name="Email" class="contacts__column" placeholder="Email *" required>
+    <input type="tel" name="Phone" class="contacts__column" placeholder="Your Phone">
+  </div>
+  <div class="contacts__row">
+    <textarea name="Message" class="contacts__column100" rows="6" placeholder="Your Message *" required></textarea>
+  </div>
+  <div id="contactFormHint" class="contacts__hint">Fields marked with * are required.</div>
+  <button type="submit" class="actionButton" onclick="onFormSubmit(this)">Send Message</button>
+</form>
+
+<script type="application/javascript">
+  function onFormSubmit(submit) {
+    const form = document.getElementById('contactForm');
+    if (!form.checkValidity())
+      return;
+    const url = 'https:\/\/uje07m6w3b.execute-api.eu-west-1.amazonaws.com\/dev\/send?source=vibrobox';
+    const toast = document.getElementById('contactFormHint');
+
+    toast.innerHTML = "Sending…";
+    submit.disabled = true;
+
+    let payload = {};
+    const inputs = form.elements;
+    for (i = 0; i < inputs.length; i++)
+      if (inputs[i].name)
+        payload[inputs[i].name] = inputs[i].value;
+
+    let req = new XMLHttpRequest();
+    req.open("POST", url, true);
+    req.setRequestHeader("Content-Type", "application/json");
+    req.onerror = function () {
+      submit.disabled = false;
+    };
+    req.onload = function () {
+      submit.disabled = false;
+      if (req.status < 400) {
+        toast.innerHTML = "Thank you for reaching us! We will contact you soon.";
+        
+        for (i = 0; i < inputs.length; i++)
+          if (inputs[i].name)
+            inputs[i].value = '';
+      } else {
+        toast.innerHTML = "Error while sending the message. Please contact us using email or try again later.";
+        console.error("Request failed: " + req.statusText);
+      }
+    };
+    req.send(JSON.stringify(payload));
+  }
+</script>
+</section>
   <section class="contacts__offices">
     <div class="contacts__office">
       <h2 class="contacts__h2">R&amp;D Office:</h2>
@@ -167,8 +231,8 @@
     </div>
   </section>
   
-  <section id="leaflet-map" class="leaflet-map"></section>
 </div>
+<section id="leaflet-map" class="leaflet-map"></section>
 
   </main>
   <footer class="footer">
@@ -246,9 +310,9 @@ if (!doNotTrack) {
     accessToken: 'pk.eyJ1Ijoidmlicm9ib3giLCJhIjoiY2l3Njhib2tqMDAwbzJ5czAxYTN4ZWt6dyJ9.1CqJcnto4oJNbHLvwzxc5A',
     detectRetina: true
   }).addTo(map);
-  var strDevelopmentOffice = 'R\x26D Office:';
-  var minsk = L.marker([53.94678, 27.61623], { title: strDevelopmentOffice, alt: strDevelopmentOffice }).addTo(map);
-  minsk.bindPopup('<p>' + strDevelopmentOffice + '</p>');
+  var strTitle = 'R\x26D Office:';
+  var minsk = L.marker([53.94678, 27.61623], { title: strTitle, alt: strTitle }).addTo(map);
+  minsk.bindPopup('<p>' + strTitle + '</p>');
   var allMarkers = new L.featureGroup([minsk]);
   map.fitBounds(allMarkers.getBounds().pad(0.5));
 </script>
