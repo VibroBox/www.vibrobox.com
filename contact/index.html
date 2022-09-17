@@ -10,7 +10,7 @@
 
 <meta name="keywords" content="contact, contacts, address, office, research, development, location, Minsk, Belarus">
 
-<meta name="generator" content="Hugo 0.61.0" />
+<meta name="generator" content="Hugo 0.103.0" />
 
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="msapplication-TileImage" content="/icons/mstile-144x144.png?v=259e50ff">
@@ -129,8 +129,7 @@
   Our Contacts
 </h1>
 <div class="preface preface--contacts">
-  <p>Please don&rsquo;t hesitate to contact us directly at <a href="mailto:info@vibrobox.com" target="_blank">info@vibrobox.com</a>, on <a href="https://m.me/VibroBox" target="_blank">FaceBook</a> or by using the form below.</p>
-
+  <p>Please don&rsquo;t hesitate to contact us directly at <a href="mailto:info@vibrobox.com">info@vibrobox.com</a>, on <a href="https://m.me/VibroBox">FaceBook</a> or by using the form below.</p>
 <p>We will gladly assist you with any questions you have regarding the service and cooperation opportunities.</p>
 
 </div>
@@ -301,7 +300,7 @@ if (!doNotTrack) {
 <script type="text/javascript">
   var map = L.map('leaflet-map', { scrollWheelZoom: false, zoomControl: false, dragging: false, touchZoom: false, doubleClickZoom: false, tap: false, boxZoom: false, keyboard: false, zoomSnap: 0.1 });
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data © \x3ca href=\x27http:\/\/openstreetmap.org\/\x27\x3eOpenStreetMap\x3c\/a\x3e | Imagery © \x3ca href=\x27http:\/\/mapbox.com\/\x27\x3eMapbox\x3c\/a\x3e',
+    attribution: 'Map data © \u003ca href=\u0027http:\/\/openstreetmap.org\/\u0027\u003eOpenStreetMap\u003c\/a\u003e | Imagery © \u003ca href=\u0027http:\/\/mapbox.com\/\u0027\u003eMapbox\u003c\/a\u003e',
     tileSize: 512,
     maxZoom: 6,
     zoomOffset: -1,
@@ -309,7 +308,7 @@ if (!doNotTrack) {
     accessToken: 'pk.eyJ1Ijoidmlicm9ib3giLCJhIjoiY2l3Njhib2tqMDAwbzJ5czAxYTN4ZWt6dyJ9.1CqJcnto4oJNbHLvwzxc5A',
     detectRetina: true
   }).addTo(map);
-  var strTitle = 'R\x26D Office:';
+  var strTitle = 'R\u0026D Office:';
   var minsk = L.marker([53.94678, 27.61623], { title: strTitle, alt: strTitle }).addTo(map);
   minsk.bindPopup('<p>' + strTitle + '</p>');
   var allMarkers = new L.featureGroup([minsk]);
